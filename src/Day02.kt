@@ -27,7 +27,7 @@ class Day02 {
 
 fun main() {
     with(Day02()) {
-        part1(readInput("Day01")).println() // 624
+        part1(readInput("Day02")).println() // 624
         part2(readInput("Day02")).println()
     }
 }
