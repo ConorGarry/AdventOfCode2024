@@ -31,3 +31,9 @@ enum class Direction(val coords: Pair<Int, Int>) {
     DownRight(1 to 1),
     None(0 to 0)
 }
+
+fun IntArray.swap(i: Int, j: Int) {
+    val temp = this[i]
+    this[i] = this[j]
+    this[j] = temp
+}
