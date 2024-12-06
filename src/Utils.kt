@@ -1,3 +1,4 @@
+import java.awt.Point
 import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.io.path.Path
@@ -32,8 +33,28 @@ enum class Direction(val coords: Pair<Int, Int>) {
     None(0 to 0)
 }
 
+fun Direction.rotate90(clockWise: Boolean = true) =
+    when (this) {
+        Direction.Up -> if (clockWise) Direction.Right else Direction.Left
+        Direction.Down -> if (clockWise) Direction.Left else Direction.Right
+        Direction.Left -> if (clockWise) Direction.Up else Direction.Down
+        Direction.Right -> if (clockWise) Direction.Down else Direction.Up
+        else -> error("Only cardinal directions can be rotated.")
+    }
+
 fun IntArray.swap(i: Int, j: Int) {
     val temp = this[i]
     this[i] = this[j]
     this[j] = temp
 }
+
+fun Point.translate(direction: Direction) {
+    val (x, y) = direction.coords
+    this.translate(x, y)
+}
+
+fun Point.peek(direction: Direction) =
+    Point(x + direction.coords.first, y + direction.coords.second)
+
+fun Point.inBounds(width: Int, height: Int) =
+    x in 0 until height && y in 0 until width
